@@ -222,7 +222,7 @@ export default function CardDetailScreen({ card, onBack }: CardDetailScreenProps
                       ? "bg-[#ff4d8d] text-white shadow-[0_4px_20px_rgba(255,77,141,0.5)] scale-[1.02]"
                       : isAvailable
                         ? "bg-white text-[#181a1f] shadow-[0_2px_8px_rgba(0,0,0,0.15)] hover:bg-gray-100 hover:scale-[1.02] active:scale-95 cursor-pointer"
-                        : "bg-[#252830]/70 text-gray-500 cursor-not-allowed opacity-60"
+                        : "bg-[#252830] text-gray-300 border border-white/10 cursor-not-allowed"
                       }`}
                   >
                     {slot.time}

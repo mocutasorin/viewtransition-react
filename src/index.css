@@ -27,6 +27,7 @@
 
 :root {
   view-transition-name: none;
+  color-scheme: light;
 }
 
 @keyframes bgExpandHeight {
@@ -35,7 +36,7 @@
   }
 
   100% {
-    height: 74%;
+    height: calc(100% - 88px);
   }
 }
 
@@ -46,7 +47,7 @@
 
 @keyframes bgContractHeight {
   0% {
-    height: 74%;
+    height: calc(100% - 88px);
   }
 
   100% {
