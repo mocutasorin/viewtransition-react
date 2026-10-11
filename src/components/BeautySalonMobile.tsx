@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect, useRef } from "react";
 import type { SalonCard } from "../types/salon";
 import CardsListScreen from "./CardsListScreen";
 import CardDetailScreen from "./CardDetailScreen";
@@ -9,7 +9,25 @@ export default function BeautySalonMobile() {
   const [isReturning, setIsReturning] = useState(false);
   const [, startTransition] = useTransition();
 
+  const selectedCardRef = useRef<SalonCard | null>(null);
+  selectedCardRef.current = selectedCard;
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (selectedCardRef.current) {
+        setIsReturning(true);
+        startTransition(() => {
+          setSelectedCard(null);
+        });
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
   const handleSelectCard = (card: SalonCard) => {
+    window.history.pushState({ view: "detail" }, "");
     startTransition(() => {
       setIsReturning(false);
       setSelectedCard(card);
@@ -17,10 +35,14 @@ export default function BeautySalonMobile() {
   };
 
   const handleBack = () => {
-    setIsReturning(true);
-    startTransition(() => {
-      setSelectedCard(null);
-    });
+    if (window.history.state?.view === "detail") {
+      window.history.back();
+    } else {
+      setIsReturning(true);
+      startTransition(() => {
+        setSelectedCard(null);
+      });
+    }
   };
 
   const handleReturnAnimationEnd = () => {
