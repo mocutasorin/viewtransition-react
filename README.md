@@ -1,6 +1,8 @@
 # ViewTransition - React 19
 
-A sleek mobile UI demonstration showcasing fluid screen transitions in **React 19** using `useTransition` and Tailwind CSS v4.
+A sleek mobile UI demonstration showcasing fluid screen transitions in **React 19** using `<ViewTransition>`, `useTransition`, and Tailwind CSS v4.
+
+🔗 **Live Demo:** [viewtransition-react.vercel.app](https://viewtransition-react.vercel.app)
 
 ---
 

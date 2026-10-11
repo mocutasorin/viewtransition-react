@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ViewTransition } from "react";
 import type { SalonCard } from "../types/salon";
 import { cardsData } from "../data/salonData";
@@ -24,7 +24,8 @@ export default function CardsListScreen({
   isReturning = false,
   onReturnAnimationEnd,
 }: CardsListScreenProps) {
-  const [dragStartX, setDragStartX] = useState<number | null>(null);
+  const dragStartX = useRef<number | null>(null);
+  const isDragging = useRef(false);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -37,13 +38,10 @@ export default function CardsListScreen({
   }, [isReturning, onReturnAnimationEnd]);
 
   const handleCardClick = (card: SalonCard, idx: number) => {
-    if (isReturning) return;
-    if (idx === currentCardIndex) {
-      setSelectedCardId(card.id);
-      onSelectCard(card);
-    } else {
-      setCurrentCardIndex(idx);
-    }
+    if (isReturning || isDragging.current) return;
+    setCurrentCardIndex(idx);
+    setSelectedCardId(card.id);
+    onSelectCard(card);
   };
 
   const nextCard = () => {
@@ -57,22 +55,34 @@ export default function CardsListScreen({
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    setDragStartX(e.clientX);
+    dragStartX.current = e.clientX;
+    isDragging.current = false;
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (dragStartX.current === null) return;
+    if (Math.abs(e.clientX - dragStartX.current) > 10) {
+      isDragging.current = true;
+    }
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    if (dragStartX === null) return;
-    const diff = dragStartX - e.clientX;
+    if (dragStartX.current === null) return;
+    const diff = dragStartX.current - e.clientX;
     if (diff > 40) {
       nextCard();
     } else if (diff < -40) {
       prevCard();
     }
-    setDragStartX(null);
+    dragStartX.current = null;
+    setTimeout(() => {
+      isDragging.current = false;
+    }, 50);
   };
 
   const handlePointerCancel = () => {
-    setDragStartX(null);
+    dragStartX.current = null;
+    isDragging.current = false;
   };
 
   return (
@@ -197,6 +207,7 @@ export default function CardsListScreen({
           <div className="flex items-center">
             <div
               onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerCancel}
               className="flex transition-transform duration-500 ease-out gap-4 cursor-grab active:cursor-grabbing w-full touch-pan-y pl-5"
@@ -206,7 +217,7 @@ export default function CardsListScreen({
                 const isCurrent = idx === currentCardIndex;
                 const isTransitioning =
                   selectedCardId === card.id ||
-                  (isReturning && isCurrent && card.id === cardsData[currentCardIndex]?.id && selectedCardId === null);
+                  (!selectedCardId && isCurrent);
                 return (
                   <ViewTransition
                     key={card.id}
