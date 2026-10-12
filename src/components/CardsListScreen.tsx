@@ -157,7 +157,7 @@ export default function CardsListScreen({
       )}
 
       {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col h-full justify-between pt-8">
+      <div className="relative z-10 flex flex-col h-full justify-between pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-8">
         {/* Header Section */}
         <div className="px-6 pt-2">
           {/* Level 1: Date & Bell */}

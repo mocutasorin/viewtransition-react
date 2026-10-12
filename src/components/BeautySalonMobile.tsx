@@ -50,15 +50,15 @@ export default function BeautySalonMobile() {
   };
 
   return (
-    <div className="min-h-screen bg-[#e8ebf0] flex items-center justify-center sm:p-6 font-sans antialiased text-[#191b1f]">
+    <div className="h-[100dvh] w-full overflow-hidden bg-[#f8f9fa] sm:h-auto sm:min-h-screen sm:bg-[#e8ebf0] sm:flex sm:items-center sm:justify-center sm:p-6 font-sans antialiased text-[#191b1f]">
       {/* Mobile Device Frame */}
       <div
-        className="w-full sm:max-w-[390px] h-[100dvh] sm:h-[820px] bg-[#f8f9fa] sm:rounded-[48px] sm:shadow-[0_20px_50px_rgba(0,0,0,0.18)] sm:border-[8px] sm:border-[#1e2024] relative overflow-hidden isolate flex flex-col justify-between select-none [transform:translateZ(0)]"
+        className="w-full h-full sm:max-w-[390px] sm:h-[820px] bg-[#f8f9fa] sm:rounded-[48px] sm:shadow-[0_20px_50px_rgba(0,0,0,0.18)] sm:border-[8px] sm:border-[#1e2024] relative overflow-hidden isolate flex flex-col justify-between select-none [transform:translateZ(0)]"
         style={{ WebkitMaskImage: "-webkit-radial-gradient(white, black)" }}
       >
 
-        {/* Dynamic Island / Status Bar spacer */}
-        <div className="absolute top-0 left-0 right-0 h-8 z-30 flex items-center justify-between px-7 pointer-events-none opacity-75">
+        {/* Dynamic Island / Status Bar spacer (only displayed in desktop mockup frame) */}
+        <div className="hidden sm:flex absolute top-0 left-0 right-0 h-8 z-30 items-center justify-between px-7 pointer-events-none opacity-75">
           <span className="text-[12px] font-semibold text-white">9:41</span>
           <div className="flex items-center gap-1.5 text-white">
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

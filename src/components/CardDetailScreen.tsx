@@ -80,7 +80,7 @@ export default function CardDetailScreen({ card, onBack }: CardDetailScreenProps
       </div>
 
       {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col h-full justify-between pt-9 px-6 pb-6">
+      <div className="relative z-10 flex flex-col h-full justify-between pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-9 px-6 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pb-6">
         {/* Top Area: Back Button + Profile Info & Thumbnail */}
         <div>
           {/* Back Arrow button */}

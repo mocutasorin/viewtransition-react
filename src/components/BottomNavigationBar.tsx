@@ -27,7 +27,7 @@ const BottomNavigationBar = memo(function BottomNavigationBar({
   return (
     <nav
       aria-label="Bottom Navigation"
-      className="bg-white border-t border-gray-100/80 px-8 py-3 pb-5 sm:pb-3.5 flex items-center justify-between"
+      className="bg-white border-t border-gray-100/80 px-8 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-3.5 flex items-center justify-between"
     >
       {/* Home */}
       <button

@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  background-color: #f8f9fa;
+}
+
+@media (min-width: 640px) {
+  body {
+    background-color: #e8ebf0;
+  }
+}
+
 @keyframes right-col-enter {
   from {
     opacity: 0;
